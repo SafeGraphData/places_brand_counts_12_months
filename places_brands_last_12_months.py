@@ -121,6 +121,7 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 css = '''
 <style>
 section.main > div:has(~ footer ) {
+     padding-top: 0px;
     padding-bottom: 0px;
 }
 
