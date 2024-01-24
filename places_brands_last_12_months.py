@@ -4,6 +4,7 @@ import altair as alt
 from datetime import datetime, timedelta
 import pandas as pd
 import streamlit.components.v1 as components
+from math import floor, ceil
 
 
 
@@ -79,10 +80,13 @@ overall_brands_last_12_df = overall_brands_last_12_df.rename(columns={"Distinct 
 
 # st.dataframe(overall_brands_last_12_df)
 
+
 y_min = overall_brands_last_12_df['Distinct brands - overall'].min()
 y_max = overall_brands_last_12_df['Distinct brands - overall'].max()
-y_range = [y_min, y_max]
-y_ticks = list(range(round(y_min / 200) * 200, round(y_max / 200) * 200, 200)) 
+y_min_rounded = floor(y_min / 1000) * 1000
+y_max_rounded =ceil(y_max / 1000) * 1000
+y_range = [ y_min_rounded,y_max_rounded ]
+y_ticks = list(range(y_min_rounded, y_max_rounded, 1000)) 
 
 
 overall_brands_last_12 = alt.Chart(overall_brands_last_12_df).mark_line().encode(
