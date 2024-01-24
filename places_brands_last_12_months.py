@@ -82,6 +82,8 @@ overall_brands_last_12_df = overall_brands_last_12_df.rename(columns={"Distinct 
 y_min = overall_brands_last_12_df['Distinct brands - overall'].min()
 y_max = overall_brands_last_12_df['Distinct brands - overall'].max()
 y_range = [y_min, y_max]
+y_ticks = list(range(round(y_min / 200) * 200, round(y_max / 200) * 200, 200)) 
+
 
 overall_brands_last_12 = alt.Chart(overall_brands_last_12_df).mark_line().encode(
     x='Release month',
@@ -89,6 +91,18 @@ overall_brands_last_12 = alt.Chart(overall_brands_last_12_df).mark_line().encode
     tooltip=[alt.Tooltip('Release month'),
              alt.Tooltip('Country'),
              alt.Tooltip('Distinct brands - overall', format=',')]
+)
+
+boxes = alt.Chart(overall_brands_last_12_df).mark_line(strokeWidth=100, opacity=0.01).encode(
+    x='Release month',
+    y=alt.Y('Distinct brands - overall', scale=alt.Scale(domain=y_range)),
+    tooltip=[alt.Tooltip('Release month'),
+             alt.Tooltip('Country'),
+             alt.Tooltip('Distinct brands - overall', format=',')]
+)
+
+combined = (
+    overall_brands_last_12 + boxes
 ).properties(
     width=800,
     height=400,
@@ -99,9 +113,13 @@ overall_brands_last_12 = alt.Chart(overall_brands_last_12_df).mark_line().encode
 ).configure_axisX(
     title=None,
     labelAngle=45
+).configure_axisY(
+    tickCount=len(y_ticks),
+    values=y_ticks
 )
 
-st.altair_chart(overall_brands_last_12,use_container_width=True)
+st.altair_chart(combined,use_container_width=True)
+
 
 hide_streamlit_style = """
             <style>
