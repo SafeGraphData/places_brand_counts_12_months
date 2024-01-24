@@ -35,10 +35,10 @@ brands_by_country_df["Distinct brands"] = pd.to_numeric(brands_by_country_df["Di
 # st.dataframe(brands_by_country_df)
 
 brands_by_country = alt.Chart(brands_by_country_df).mark_bar().encode(
-    x='Release month',
+    x=alt.X('Release month', timeUnit='utcyearmonth'),
     y='Distinct brands',
     color='Country',
-    tooltip=[alt.Tooltip('Release month'),
+    tooltip=[alt.Tooltip('Release month', timeUnit='utcyearmonth', title='Release month'),
              alt.Tooltip('Country'),
              alt.Tooltip('Distinct brands', format=',')]
 ).properties(
@@ -90,17 +90,17 @@ y_ticks = list(range(y_min_rounded, y_max_rounded, 1000))
 
 
 overall_brands_last_12 = alt.Chart(overall_brands_last_12_df).mark_line().encode(
-    x='Release month',
+    x=alt.X('Release month', timeUnit='utcyearmonth'),
     y=alt.Y('Distinct brands - overall', scale=alt.Scale(domain=y_range)),
-    tooltip=[alt.Tooltip('Release month'),
+    tooltip=[alt.Tooltip('Release month', timeUnit='utcyearmonth', title='Release month'),
              alt.Tooltip('Country'),
              alt.Tooltip('Distinct brands - overall', format=',')]
 )
 
 boxes = alt.Chart(overall_brands_last_12_df).mark_line(strokeWidth=100, opacity=0.01).encode(
-    x='Release month',
+    x=alt.X('Release month', timeUnit='utcyearmonth'),
     y=alt.Y('Distinct brands - overall', scale=alt.Scale(domain=y_range)),
-    tooltip=[alt.Tooltip('Release month'),
+    tooltip=[alt.Tooltip('Release month', timeUnit='utcyearmonth', title='Release month'),
              alt.Tooltip('Country'),
              alt.Tooltip('Distinct brands - overall', format=',')]
 )
