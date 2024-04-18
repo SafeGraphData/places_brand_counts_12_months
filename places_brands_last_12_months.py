@@ -38,7 +38,7 @@ brands_by_country_df["Distinct brands"] = pd.to_numeric(brands_by_country_df["Di
 brands_by_country = alt.Chart(brands_by_country_df).mark_bar().encode(
     x=alt.X('Release month', timeUnit='yearmonth'),
     y='Distinct brands',
-    color='Country',
+    color=alt.Color('Country', scale=alt.Scale(scheme='redyellowblue')),
     tooltip=[alt.Tooltip('Release month', timeUnit='yearmonth', title='Release month'),
              alt.Tooltip('Country'),
              alt.Tooltip('Distinct brands', format=',')]
