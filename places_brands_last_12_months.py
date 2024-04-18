@@ -113,7 +113,7 @@ combined = (
     width=800,
     height=400,
     title=alt.TitleParams(
-        text=''#,'Distinct Brand Count Overall - Last 12 months',
+        text='',#'Distinct Brand Count Overall - Last 12 months',
         fontSize=18
     )
 ).configure_axisX(
