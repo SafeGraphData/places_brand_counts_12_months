@@ -90,7 +90,7 @@ y_max_rounded =ceil(y_max / 1000) * 1000
 y_range = [ y_min_rounded,y_max_rounded ]
 y_ticks = list(range(y_min_rounded, y_max_rounded, 1000)) 
 
-st.markdown('##### Distinct Brand Count Overall - Last 12 months')
+st.markdown('###### Distinct Brand Count Overall - Last 12 months')
 overall_brands_last_12 = alt.Chart(overall_brands_last_12_df).mark_line().encode(
     x=alt.X('Release month', timeUnit='yearmonth'),
     y=alt.Y('Distinct brands - overall', scale=alt.Scale(domain=y_range)),
