@@ -59,7 +59,7 @@ brands_by_country = alt.Chart(brands_by_country_df).mark_bar().encode(
 st.altair_chart(brands_by_country, use_container_width=True)
 
 #### Overall Brands Last 12 Months ####
-global_places_df = read_from_gsheets("Global Places")
+global_places_df = (read_from_gsheets("Global Places").query('Country  != "Excluding US"').reset_index(drop=True))
 global_places_df = global_places_df[["Release month", "Country", "Distinct brands"]]
 
 for i, value in enumerate(global_places_df['Release month']):
